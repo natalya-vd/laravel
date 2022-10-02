@@ -1,3 +1,6 @@
 <header {{ $attributes }}>
-    Header
+    <p>Header</p>
+    <div>
+        <a href="{{ route('auth') }}">Войти</a>
+    </div>
 </header>
