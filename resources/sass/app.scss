@@ -1,0 +1,16 @@
+// Reset styles
+@import './reset.scss';
+
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+// Users styles
+@import './components/layout.scss';
+@import './components/menu.scss';
+@import './auth.scss';

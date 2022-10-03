@@ -8,16 +8,21 @@ class IndexController extends Controller
 {
     public function index()
     {
-        return view('pages.admin.index');
+        return view('admin.pages.index');
     }
 
     public function test1()
     {
-        return view('pages.admin.test1');
+        return view('admin.pages.test1');
     }
 
     public function test2()
     {
-        return view('pages.admin.test2');
+        return view('admin.pages.test2');
+    }
+
+    public function addNewsTemplate()
+    {
+        return view('admin.pages.add-news');
     }
 }

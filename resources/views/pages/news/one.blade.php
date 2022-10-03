@@ -1,17 +1,23 @@
 <x-layout>
     @empty($news)
-    <p>
+    <x-card-error>
         По данному запросу ничего не найдено. Попробуйте другой ID
-    </p>
+    </x-card-error>
     @endempty
 
     @isset($news)
-    <h1>
+    @if(!$news['isPrivate'])
+    <h1 class="mb-4">
         {{$news['title']}}
     </h1>
     <p>
         {{$news['text']}}
     </p>
+    @else
+    <x-card-warning>
+        Зарегистрируйтесь для просмотра
+    </x-card-warning>
+    @endif
     @endisset
 
 </x-layout>

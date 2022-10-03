@@ -29,17 +29,21 @@ Route::get('/auth', [AuthController::class, 'index'])->name('auth');
 Route::name('news.')
     ->prefix('news')
     ->group(function () {
-        Route::get('/', [NewsController::class, 'list'])->name('home');
-        Route::get('/category', [CategoriesController::class, 'list'])->name('category');
-        Route::get('/category/{categoryId}', [NewsController::class, 'newsCategory'])->name('category-one');
-        Route::get('/category/{categoryId}/{id}', [NewsController::class, 'one'])->name('one');
-        Route::get('/add', [NewsController::class, 'addNewsTemplate'])->name('addNewsTemplate');
+        Route::get('/', [NewsController::class, 'list'])->name('list');
+        Route::name('category.')
+            ->prefix('category')
+            ->group(function () {
+                Route::get('/', [CategoriesController::class, 'list'])->name('list');
+                Route::get('/{slug}', [CategoriesController::class, 'newsList'])->name('newsList');
+                Route::get('/{slug}/{id}', [NewsController::class, 'one'])->name('one');
+            });
     });
 
 Route::name('admin.')
     ->prefix('admin')
     ->group(function () {
         Route::get('/', [AdminIndexController::class, 'index'])->name('home');
+        Route::get('/add-news', [AdminIndexController::class, 'addNewsTemplate'])->name('addNewsTemplate');
         Route::get('/test1', [AdminIndexController::class, 'test1'])->name('test1');
         Route::get('/test2', [AdminIndexController::class, 'test2'])->name('test2');
     });
