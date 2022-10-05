@@ -4,7 +4,9 @@ namespace App\Models\News;
 
 class News
 {
-    private static $news = [
+    private Categories $category;
+
+    private $news = [
         '1' => [
             'id' => 1,
             'title' => 'Новость 1',
@@ -12,6 +14,7 @@ class News
             'text' => 'Новость 1.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cumque repellendus minima deleniti? Aperiam, vero! Nesciunt tempore blanditiis minus placeat recusandae labore sequi animi eligendi similique et, consequatur ipsam non!
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia esse, minus dolorum deserunt ipsam sit, aperiam dolor, assumenda fuga expedita veritatis ad. Impedit, inventore cupiditate voluptatum ad necessitatibus nemo sint error eveniet hic commodi itaque atque ab porro, amet officia perspiciatis sequi ea rem nobis, iusto tempora sunt. Modi, quis pariatur, optio quasi hic dicta nisi iusto quibusdam, debitis earum mollitia excepturi neque. Iste suscipit ut sed voluptas quisquam dolores quos, temporibus facere laudantium commodi reiciendis magnam ipsam omnis beatae dicta sit? Qui, et? Quod, quasi voluptas. Quas recusandae numquam provident, hic amet laudantium voluptates, maxime atque, non laborum dolores?',
+            'isPrivate' => false,
             'category_id' => 1
         ],
         '2' => [
@@ -21,6 +24,7 @@ class News
             'text' => 'Новость 2.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cumque repellendus minima deleniti? Aperiam, vero! Nesciunt tempore blanditiis minus placeat recusandae labore sequi animi eligendi similique et, consequatur ipsam non!
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia esse, minus dolorum deserunt ipsam sit, aperiam dolor, assumenda fuga expedita veritatis ad. Impedit, inventore cupiditate voluptatum ad necessitatibus nemo sint error eveniet hic commodi itaque atque ab porro, amet officia perspiciatis sequi ea rem nobis, iusto tempora sunt. Modi, quis pariatur, optio quasi hic dicta nisi iusto quibusdam, debitis earum mollitia excepturi neque. Iste suscipit ut sed voluptas quisquam dolores quos, temporibus facere laudantium commodi reiciendis magnam ipsam omnis beatae dicta sit? Qui, et? Quod, quasi voluptas. Quas recusandae numquam provident, hic amet laudantium voluptates, maxime atque, non laborum dolores?',
+            'isPrivate' => true,
             'category_id' => 1
         ],
         '3' => [
@@ -30,6 +34,7 @@ class News
             'text' => 'Новость 3.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cumque repellendus minima deleniti? Aperiam, vero! Nesciunt tempore blanditiis minus placeat recusandae labore sequi animi eligendi similique et, consequatur ipsam non!
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia esse, minus dolorum deserunt ipsam sit, aperiam dolor, assumenda fuga expedita veritatis ad. Impedit, inventore cupiditate voluptatum ad necessitatibus nemo sint error eveniet hic commodi itaque atque ab porro, amet officia perspiciatis sequi ea rem nobis, iusto tempora sunt. Modi, quis pariatur, optio quasi hic dicta nisi iusto quibusdam, debitis earum mollitia excepturi neque. Iste suscipit ut sed voluptas quisquam dolores quos, temporibus facere laudantium commodi reiciendis magnam ipsam omnis beatae dicta sit? Qui, et? Quod, quasi voluptas. Quas recusandae numquam provident, hic amet laudantium voluptates, maxime atque, non laborum dolores?',
+            'isPrivate' => false,
             'category_id' => 1
         ],
         '4' => [
@@ -39,6 +44,7 @@ class News
             'text' => 'Новость 4.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cumque repellendus minima deleniti? Aperiam, vero! Nesciunt tempore blanditiis minus placeat recusandae labore sequi animi eligendi similique et, consequatur ipsam non!
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia esse, minus dolorum deserunt ipsam sit, aperiam dolor, assumenda fuga expedita veritatis ad. Impedit, inventore cupiditate voluptatum ad necessitatibus nemo sint error eveniet hic commodi itaque atque ab porro, amet officia perspiciatis sequi ea rem nobis, iusto tempora sunt. Modi, quis pariatur, optio quasi hic dicta nisi iusto quibusdam, debitis earum mollitia excepturi neque. Iste suscipit ut sed voluptas quisquam dolores quos, temporibus facere laudantium commodi reiciendis magnam ipsam omnis beatae dicta sit? Qui, et? Quod, quasi voluptas. Quas recusandae numquam provident, hic amet laudantium voluptates, maxime atque, non laborum dolores?',
+            'isPrivate' => false,
             'category_id' => 1
         ],
 
@@ -49,6 +55,7 @@ class News
             'text' => 'Новость 5.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cumque repellendus minima deleniti? Aperiam, vero! Nesciunt tempore blanditiis minus placeat recusandae labore sequi animi eligendi similique et, consequatur ipsam non!
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia esse, minus dolorum deserunt ipsam sit, aperiam dolor, assumenda fuga expedita veritatis ad. Impedit, inventore cupiditate voluptatum ad necessitatibus nemo sint error eveniet hic commodi itaque atque ab porro, amet officia perspiciatis sequi ea rem nobis, iusto tempora sunt. Modi, quis pariatur, optio quasi hic dicta nisi iusto quibusdam, debitis earum mollitia excepturi neque. Iste suscipit ut sed voluptas quisquam dolores quos, temporibus facere laudantium commodi reiciendis magnam ipsam omnis beatae dicta sit? Qui, et? Quod, quasi voluptas. Quas recusandae numquam provident, hic amet laudantium voluptates, maxime atque, non laborum dolores?',
+            'isPrivate' => false,
             'category_id' => 2
         ],
         '6' => [
@@ -58,6 +65,7 @@ class News
             'text' => 'Новость 6.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cumque repellendus minima deleniti? Aperiam, vero! Nesciunt tempore blanditiis minus placeat recusandae labore sequi animi eligendi similique et, consequatur ipsam non!
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia esse, minus dolorum deserunt ipsam sit, aperiam dolor, assumenda fuga expedita veritatis ad. Impedit, inventore cupiditate voluptatum ad necessitatibus nemo sint error eveniet hic commodi itaque atque ab porro, amet officia perspiciatis sequi ea rem nobis, iusto tempora sunt. Modi, quis pariatur, optio quasi hic dicta nisi iusto quibusdam, debitis earum mollitia excepturi neque. Iste suscipit ut sed voluptas quisquam dolores quos, temporibus facere laudantium commodi reiciendis magnam ipsam omnis beatae dicta sit? Qui, et? Quod, quasi voluptas. Quas recusandae numquam provident, hic amet laudantium voluptates, maxime atque, non laborum dolores?',
+            'isPrivate' => false,
             'category_id' => 2
         ],
         '7' => [
@@ -67,6 +75,7 @@ class News
             'text' => 'Новость 7.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cumque repellendus minima deleniti? Aperiam, vero! Nesciunt tempore blanditiis minus placeat recusandae labore sequi animi eligendi similique et, consequatur ipsam non!
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia esse, minus dolorum deserunt ipsam sit, aperiam dolor, assumenda fuga expedita veritatis ad. Impedit, inventore cupiditate voluptatum ad necessitatibus nemo sint error eveniet hic commodi itaque atque ab porro, amet officia perspiciatis sequi ea rem nobis, iusto tempora sunt. Modi, quis pariatur, optio quasi hic dicta nisi iusto quibusdam, debitis earum mollitia excepturi neque. Iste suscipit ut sed voluptas quisquam dolores quos, temporibus facere laudantium commodi reiciendis magnam ipsam omnis beatae dicta sit? Qui, et? Quod, quasi voluptas. Quas recusandae numquam provident, hic amet laudantium voluptates, maxime atque, non laborum dolores?',
+            'isPrivate' => true,
             'category_id' => 2
         ],
         '8' => [
@@ -76,6 +85,7 @@ class News
             'text' => 'Новость 8.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cumque repellendus minima deleniti? Aperiam, vero! Nesciunt tempore blanditiis minus placeat recusandae labore sequi animi eligendi similique et, consequatur ipsam non!
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia esse, minus dolorum deserunt ipsam sit, aperiam dolor, assumenda fuga expedita veritatis ad. Impedit, inventore cupiditate voluptatum ad necessitatibus nemo sint error eveniet hic commodi itaque atque ab porro, amet officia perspiciatis sequi ea rem nobis, iusto tempora sunt. Modi, quis pariatur, optio quasi hic dicta nisi iusto quibusdam, debitis earum mollitia excepturi neque. Iste suscipit ut sed voluptas quisquam dolores quos, temporibus facere laudantium commodi reiciendis magnam ipsam omnis beatae dicta sit? Qui, et? Quod, quasi voluptas. Quas recusandae numquam provident, hic amet laudantium voluptates, maxime atque, non laborum dolores?',
+            'isPrivate' => true,
             'category_id' => 2
         ],
 
@@ -86,6 +96,7 @@ class News
             'text' => 'Новость 9.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cumque repellendus minima deleniti? Aperiam, vero! Nesciunt tempore blanditiis minus placeat recusandae labore sequi animi eligendi similique et, consequatur ipsam non!
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia esse, minus dolorum deserunt ipsam sit, aperiam dolor, assumenda fuga expedita veritatis ad. Impedit, inventore cupiditate voluptatum ad necessitatibus nemo sint error eveniet hic commodi itaque atque ab porro, amet officia perspiciatis sequi ea rem nobis, iusto tempora sunt. Modi, quis pariatur, optio quasi hic dicta nisi iusto quibusdam, debitis earum mollitia excepturi neque. Iste suscipit ut sed voluptas quisquam dolores quos, temporibus facere laudantium commodi reiciendis magnam ipsam omnis beatae dicta sit? Qui, et? Quod, quasi voluptas. Quas recusandae numquam provident, hic amet laudantium voluptates, maxime atque, non laborum dolores?',
+            'isPrivate' => false,
             'category_id' => 3
         ],
         '10' => [
@@ -95,6 +106,7 @@ class News
             'text' => 'Новость 10.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cumque repellendus minima deleniti? Aperiam, vero! Nesciunt tempore blanditiis minus placeat recusandae labore sequi animi eligendi similique et, consequatur ipsam non!
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia esse, minus dolorum deserunt ipsam sit, aperiam dolor, assumenda fuga expedita veritatis ad. Impedit, inventore cupiditate voluptatum ad necessitatibus nemo sint error eveniet hic commodi itaque atque ab porro, amet officia perspiciatis sequi ea rem nobis, iusto tempora sunt. Modi, quis pariatur, optio quasi hic dicta nisi iusto quibusdam, debitis earum mollitia excepturi neque. Iste suscipit ut sed voluptas quisquam dolores quos, temporibus facere laudantium commodi reiciendis magnam ipsam omnis beatae dicta sit? Qui, et? Quod, quasi voluptas. Quas recusandae numquam provident, hic amet laudantium voluptates, maxime atque, non laborum dolores?',
+            'isPrivate' => false,
             'category_id' => 3
         ],
         '11' => [
@@ -104,6 +116,7 @@ class News
             'text' => 'Новость 11.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cumque repellendus minima deleniti? Aperiam, vero! Nesciunt tempore blanditiis minus placeat recusandae labore sequi animi eligendi similique et, consequatur ipsam non!
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia esse, minus dolorum deserunt ipsam sit, aperiam dolor, assumenda fuga expedita veritatis ad. Impedit, inventore cupiditate voluptatum ad necessitatibus nemo sint error eveniet hic commodi itaque atque ab porro, amet officia perspiciatis sequi ea rem nobis, iusto tempora sunt. Modi, quis pariatur, optio quasi hic dicta nisi iusto quibusdam, debitis earum mollitia excepturi neque. Iste suscipit ut sed voluptas quisquam dolores quos, temporibus facere laudantium commodi reiciendis magnam ipsam omnis beatae dicta sit? Qui, et? Quod, quasi voluptas. Quas recusandae numquam provident, hic amet laudantium voluptates, maxime atque, non laborum dolores?',
+            'isPrivate' => false,
             'category_id' => 3
         ],
         '12' => [
@@ -113,6 +126,7 @@ class News
             'text' => 'Новость 12.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cumque repellendus minima deleniti? Aperiam, vero! Nesciunt tempore blanditiis minus placeat recusandae labore sequi animi eligendi similique et, consequatur ipsam non!
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia esse, minus dolorum deserunt ipsam sit, aperiam dolor, assumenda fuga expedita veritatis ad. Impedit, inventore cupiditate voluptatum ad necessitatibus nemo sint error eveniet hic commodi itaque atque ab porro, amet officia perspiciatis sequi ea rem nobis, iusto tempora sunt. Modi, quis pariatur, optio quasi hic dicta nisi iusto quibusdam, debitis earum mollitia excepturi neque. Iste suscipit ut sed voluptas quisquam dolores quos, temporibus facere laudantium commodi reiciendis magnam ipsam omnis beatae dicta sit? Qui, et? Quod, quasi voluptas. Quas recusandae numquam provident, hic amet laudantium voluptates, maxime atque, non laborum dolores?',
+            'isPrivate' => false,
             'category_id' => 3
         ],
 
@@ -123,6 +137,7 @@ class News
             'text' => 'Новость 13.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cumque repellendus minima deleniti? Aperiam, vero! Nesciunt tempore blanditiis minus placeat recusandae labore sequi animi eligendi similique et, consequatur ipsam non!
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia esse, minus dolorum deserunt ipsam sit, aperiam dolor, assumenda fuga expedita veritatis ad. Impedit, inventore cupiditate voluptatum ad necessitatibus nemo sint error eveniet hic commodi itaque atque ab porro, amet officia perspiciatis sequi ea rem nobis, iusto tempora sunt. Modi, quis pariatur, optio quasi hic dicta nisi iusto quibusdam, debitis earum mollitia excepturi neque. Iste suscipit ut sed voluptas quisquam dolores quos, temporibus facere laudantium commodi reiciendis magnam ipsam omnis beatae dicta sit? Qui, et? Quod, quasi voluptas. Quas recusandae numquam provident, hic amet laudantium voluptates, maxime atque, non laborum dolores?',
+            'isPrivate' => true,
             'category_id' => 4
         ],
         '14' => [
@@ -132,6 +147,7 @@ class News
             'text' => 'Новость 14.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cumque repellendus minima deleniti? Aperiam, vero! Nesciunt tempore blanditiis minus placeat recusandae labore sequi animi eligendi similique et, consequatur ipsam non!
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia esse, minus dolorum deserunt ipsam sit, aperiam dolor, assumenda fuga expedita veritatis ad. Impedit, inventore cupiditate voluptatum ad necessitatibus nemo sint error eveniet hic commodi itaque atque ab porro, amet officia perspiciatis sequi ea rem nobis, iusto tempora sunt. Modi, quis pariatur, optio quasi hic dicta nisi iusto quibusdam, debitis earum mollitia excepturi neque. Iste suscipit ut sed voluptas quisquam dolores quos, temporibus facere laudantium commodi reiciendis magnam ipsam omnis beatae dicta sit? Qui, et? Quod, quasi voluptas. Quas recusandae numquam provident, hic amet laudantium voluptates, maxime atque, non laborum dolores?',
+            'isPrivate' => false,
             'category_id' => 4
         ],
         '15' => [
@@ -141,6 +157,7 @@ class News
             'text' => 'Новость 15.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cumque repellendus minima deleniti? Aperiam, vero! Nesciunt tempore blanditiis minus placeat recusandae labore sequi animi eligendi similique et, consequatur ipsam non!
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia esse, minus dolorum deserunt ipsam sit, aperiam dolor, assumenda fuga expedita veritatis ad. Impedit, inventore cupiditate voluptatum ad necessitatibus nemo sint error eveniet hic commodi itaque atque ab porro, amet officia perspiciatis sequi ea rem nobis, iusto tempora sunt. Modi, quis pariatur, optio quasi hic dicta nisi iusto quibusdam, debitis earum mollitia excepturi neque. Iste suscipit ut sed voluptas quisquam dolores quos, temporibus facere laudantium commodi reiciendis magnam ipsam omnis beatae dicta sit? Qui, et? Quod, quasi voluptas. Quas recusandae numquam provident, hic amet laudantium voluptates, maxime atque, non laborum dolores?',
+            'isPrivate' => true,
             'category_id' => 4
         ],
         '16' => [
@@ -150,6 +167,7 @@ class News
             'text' => 'Новость 16.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cumque repellendus minima deleniti? Aperiam, vero! Nesciunt tempore blanditiis minus placeat recusandae labore sequi animi eligendi similique et, consequatur ipsam non!
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia esse, minus dolorum deserunt ipsam sit, aperiam dolor, assumenda fuga expedita veritatis ad. Impedit, inventore cupiditate voluptatum ad necessitatibus nemo sint error eveniet hic commodi itaque atque ab porro, amet officia perspiciatis sequi ea rem nobis, iusto tempora sunt. Modi, quis pariatur, optio quasi hic dicta nisi iusto quibusdam, debitis earum mollitia excepturi neque. Iste suscipit ut sed voluptas quisquam dolores quos, temporibus facere laudantium commodi reiciendis magnam ipsam omnis beatae dicta sit? Qui, et? Quod, quasi voluptas. Quas recusandae numquam provident, hic amet laudantium voluptates, maxime atque, non laborum dolores?',
+            'isPrivate' => false,
             'category_id' => 4
         ],
 
@@ -160,6 +178,7 @@ class News
             'text' => 'Новость 17.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cumque repellendus minima deleniti? Aperiam, vero! Nesciunt tempore blanditiis minus placeat recusandae labore sequi animi eligendi similique et, consequatur ipsam non!
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia esse, minus dolorum deserunt ipsam sit, aperiam dolor, assumenda fuga expedita veritatis ad. Impedit, inventore cupiditate voluptatum ad necessitatibus nemo sint error eveniet hic commodi itaque atque ab porro, amet officia perspiciatis sequi ea rem nobis, iusto tempora sunt. Modi, quis pariatur, optio quasi hic dicta nisi iusto quibusdam, debitis earum mollitia excepturi neque. Iste suscipit ut sed voluptas quisquam dolores quos, temporibus facere laudantium commodi reiciendis magnam ipsam omnis beatae dicta sit? Qui, et? Quod, quasi voluptas. Quas recusandae numquam provident, hic amet laudantium voluptates, maxime atque, non laborum dolores?',
+            'isPrivate' => false,
             'category_id' => 5
         ],
         '18' => [
@@ -169,6 +188,7 @@ class News
             'text' => 'Новость 18.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cumque repellendus minima deleniti? Aperiam, vero! Nesciunt tempore blanditiis minus placeat recusandae labore sequi animi eligendi similique et, consequatur ipsam non!
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia esse, minus dolorum deserunt ipsam sit, aperiam dolor, assumenda fuga expedita veritatis ad. Impedit, inventore cupiditate voluptatum ad necessitatibus nemo sint error eveniet hic commodi itaque atque ab porro, amet officia perspiciatis sequi ea rem nobis, iusto tempora sunt. Modi, quis pariatur, optio quasi hic dicta nisi iusto quibusdam, debitis earum mollitia excepturi neque. Iste suscipit ut sed voluptas quisquam dolores quos, temporibus facere laudantium commodi reiciendis magnam ipsam omnis beatae dicta sit? Qui, et? Quod, quasi voluptas. Quas recusandae numquam provident, hic amet laudantium voluptates, maxime atque, non laborum dolores?',
+            'isPrivate' => true,
             'category_id' => 5
         ],
         '19' => [
@@ -178,6 +198,7 @@ class News
             'text' => 'Новость 19.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cumque repellendus minima deleniti? Aperiam, vero! Nesciunt tempore blanditiis minus placeat recusandae labore sequi animi eligendi similique et, consequatur ipsam non!
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia esse, minus dolorum deserunt ipsam sit, aperiam dolor, assumenda fuga expedita veritatis ad. Impedit, inventore cupiditate voluptatum ad necessitatibus nemo sint error eveniet hic commodi itaque atque ab porro, amet officia perspiciatis sequi ea rem nobis, iusto tempora sunt. Modi, quis pariatur, optio quasi hic dicta nisi iusto quibusdam, debitis earum mollitia excepturi neque. Iste suscipit ut sed voluptas quisquam dolores quos, temporibus facere laudantium commodi reiciendis magnam ipsam omnis beatae dicta sit? Qui, et? Quod, quasi voluptas. Quas recusandae numquam provident, hic amet laudantium voluptates, maxime atque, non laborum dolores?',
+            'isPrivate' => false,
             'category_id' => 5
         ],
         '20' => [
@@ -187,34 +208,54 @@ class News
             'text' => 'Новость 20.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cumque repellendus minima deleniti? Aperiam, vero! Nesciunt tempore blanditiis minus placeat recusandae labore sequi animi eligendi similique et, consequatur ipsam non!
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia esse, minus dolorum deserunt ipsam sit, aperiam dolor, assumenda fuga expedita veritatis ad. Impedit, inventore cupiditate voluptatum ad necessitatibus nemo sint error eveniet hic commodi itaque atque ab porro, amet officia perspiciatis sequi ea rem nobis, iusto tempora sunt. Modi, quis pariatur, optio quasi hic dicta nisi iusto quibusdam, debitis earum mollitia excepturi neque. Iste suscipit ut sed voluptas quisquam dolores quos, temporibus facere laudantium commodi reiciendis magnam ipsam omnis beatae dicta sit? Qui, et? Quod, quasi voluptas. Quas recusandae numquam provident, hic amet laudantium voluptates, maxime atque, non laborum dolores?',
+            'isPrivate' => false,
             'category_id' => 5
         ]
     ];
 
-    public static function getNews(): array
+    public function __construct(Categories $category)
     {
-        return static::$news;
+        $this->category = $category;
     }
 
-    public static function getNewsId($id): ?array
+    public function getNewsByCategorySlug($slug): array
     {
-        $newsList = static::getNews();
-        if (array_key_exists($id, $newsList)) {
+        $id = $this->category->getIdCategoryBySlug($slug);
+        $news = [];
+        foreach ($this->getNews() as $item) {
+            if ($item['category_id'] == $id) {
+                $news[] = $item;
+            }
+        }
+
+        return $news;
+    }
+
+    public function getNews(): array
+    {
+        return $this->news;
+    }
+
+    public function getNewsId($slug, $id): ?array
+    {
+        $newsList = $this->getNews();
+        $category_id = $this->category->getIdCategoryBySlug($slug);
+        if (array_key_exists($id, $newsList) && $newsList[$id]['category_id'] == $category_id) {
             return $newsList[$id];
         }
 
         return null;
     }
 
-    public static function getNewsCategory($categoryId): ?array
+    public function getNewsWithSlug()
     {
-        $newsCategory = [];
-        foreach (static::getNews() as $news) {
-            if ($news['category_id'] == $categoryId) {
-                $newsCategory[] = $news;
-            }
+        $newsList = [];
+        foreach ($this->getNews() as $item) {
+            $slug = $this->category->getSlugById($item['category_id']);
+            $item['slug'] = $slug;
+            $newsList[] = $item;
         }
 
-        return $newsCategory;
+        return $newsList;
     }
 }

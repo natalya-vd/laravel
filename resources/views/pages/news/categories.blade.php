@@ -1,17 +1,21 @@
 <x-layout>
-    <h1>Категории новостей</h1>
+    <h1 class="mb-4">Категории новостей</h1>
 
-    <div>
-        <a href="{{ route('news.addNewsTemplate') }}">Добавить новость</a>
-    </div>
+    @empty($categories)
+    <x-card-error>
+        Нет категорий новостей для просмотра.
+    </x-card-error>
+    @endempty
 
-    <ul>
+    @if($categories)
+    <ul class="list-group list-group-flush">
         @foreach ($categories as $item)
-        <li>
-            <a href="{{ route('news.category-one', $item['id']) }}">
+        <li class="list-group-item">
+            <a class="stretched-link" href="{{ route('news.category.newsList', $item['slug']) }}">
                 {{$item['title']}}
             </a>
         </li>
         @endforeach
     </ul>
+    @endif
 </x-layout>

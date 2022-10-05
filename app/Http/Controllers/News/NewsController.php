@@ -7,28 +7,14 @@ use App\Models\News\News;
 
 class NewsController extends Controller
 {
-    public function list()
+    public function list(News $news)
     {
-        $news = News::getNews();
-        return view('pages.news.news')->with('news', $news);
+        return view('pages.news.index')->with('news', $news->getNewsWithSlug());
     }
 
-    public function one($categoryId, $id)
+    public function one($slug, $id, News $news)
     {
-        $news = News::getNewsId($id);
-
-        return view('pages.news.news-one')->with('news', $news);
-    }
-
-    public function newsCategory($categoryId)
-    {
-        $news = News::getNewsCategory($categoryId);
-
-        return view('pages.news.categories-one')->with('news', $news);
-    }
-
-    public function addNewsTemplate()
-    {
-        return view('pages.news.add-news');
+        return view('pages.news.one')
+            ->with('news', $news->getNewsId($slug, $id));
     }
 }
