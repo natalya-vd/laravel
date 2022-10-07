@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/info', [InfoController::class, 'index'])->name('info');
 Route::get('/auth', [AuthController::class, 'index'])->name('auth');
+Route::get('/save', [AdminIndexController::class, 'save'])->name('save');
 
 Route::name('news.')
     ->prefix('news')
@@ -43,9 +44,9 @@ Route::name('admin.')
     ->prefix('admin')
     ->group(function () {
         Route::get('/', [AdminIndexController::class, 'index'])->name('home');
-        Route::get('/add-news', [AdminIndexController::class, 'addNewsTemplate'])->name('addNewsTemplate');
-        Route::get('/test1', [AdminIndexController::class, 'test1'])->name('test1');
-        Route::get('/test2', [AdminIndexController::class, 'test2'])->name('test2');
+        Route::match(['get', 'post'], '/create', [AdminIndexController::class, 'create'])->name('create');
+        Route::get('/download-img', [AdminIndexController::class, 'downloadImg'])->name('downloadImg');
+        Route::match(['get', 'post'], '/download-news', [AdminIndexController::class, 'downloadNews'])->name('downloadNews');
     });
 
 

@@ -1,3 +1,7 @@
 *
 !public/
 !.gitignore
+
+# User exeption
+!news.json
+!categories.json

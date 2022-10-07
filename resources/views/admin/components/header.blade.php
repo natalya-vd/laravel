@@ -13,7 +13,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a class="dropdown-item" href="{{ route('admin.addNewsTemplate') }}">
+                        <a class="dropdown-item" href="{{ route('admin.create') }}">
                             Добавить новость
                         </a>
                     </li>
@@ -21,13 +21,13 @@
                         <hr class="dropdown-divider">
                     </li>
                     <li>
-                        <a class="dropdown-item" href="{{ route('admin.test1') }}">
-                            test1
+                        <a class="dropdown-item" href="{{ route('admin.downloadImg') }}">
+                            Скачать изображение
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="{{ route('admin.test2') }}">
-                            test2
+                        <a class="dropdown-item" href="{{ route('admin.downloadNews') }}">
+                            Скачать новость
                         </a>
                     </li>
                 </ul>
