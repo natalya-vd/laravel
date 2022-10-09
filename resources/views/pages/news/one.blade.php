@@ -5,7 +5,7 @@
     </x-card-error>
     @endempty
 
-    @isset($news)
+    @if($news)
     @if(!$news['isPrivate'])
     <h1 class="mb-4">
         {{$news['title']}}
@@ -18,6 +18,6 @@
         Зарегистрируйтесь для просмотра
     </x-card-warning>
     @endif
-    @endisset
+    @endif
 
 </x-layout>
