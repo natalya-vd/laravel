@@ -10,15 +10,15 @@
 
 @section('content')
 <main class="container py-5">
-    <form class="add-news card border-0 mx-auto" action="{{ route('admin.create') }}" method="post">
+    <form class="add-news card border-0 mx-auto" action="{{ route('admin.create') }}" method="post" enctype="multipart/form-data">
         @csrf
         <p class="bg-secondary p-3 bg-gradient text-white">Добавить новость</p>
         <div class="card-body">
             <div class="form-floating mb-3">
                 <select class="form-select" name="category_id" id="categoryNews" aria-label="Выбор категории">
                     @forelse($categories as $item)
-                    <option @if (old('category_news')==$item['id']) selected @endif value="{{ $item['id'] }}">
-                        {{ $item['title'] }}
+                    <option @if (old('category_news')==$item->id) selected @endif value="{{ $item->id }}">
+                        {{ $item->title }}
                     </option>
                     @empty
                     <option value="0">
@@ -32,7 +32,7 @@
             </div>
 
             <label class="mb-3">
-                <input class="form-check-input" type="checkbox" value="1" name="isPrivate" @if (old('isPrivate')==='1' ) checked @endif> Приватная новость
+                <input class="form-check-input" type="checkbox" value="1" name="is_private" @if (old('is_private')==='1' ) checked @endif> Приватная новость
             </label>
 
             <div class="form-floating">
@@ -54,6 +54,11 @@
                 <label for="newsText">
                     Введите новость
                 </label>
+            </div>
+
+            <div class="mb-3">
+                <label for="newsImage" class="form-label">Загрузка фотографии</label>
+                <input class="form-control" type="file" id="newsImage" name="image">
             </div>
 
             <div class="mt-5 mb-4">

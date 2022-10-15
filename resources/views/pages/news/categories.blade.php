@@ -11,8 +11,8 @@
     <ul class="list-group list-group-flush">
         @foreach ($categories as $item)
         <li class="list-group-item">
-            <a class="stretched-link" href="{{ route('news.category.newsList', $item['slug']) }}">
-                {{$item['title']}}
+            <a class="stretched-link" href="{{ route('news.category.newsList', $item->slug) }}">
+                {{$item->title}}
             </a>
         </li>
         @endforeach

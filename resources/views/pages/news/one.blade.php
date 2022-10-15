@@ -6,12 +6,15 @@
     @endempty
 
     @if($news)
-    @if(!$news['isPrivate'])
+    @if(!$news->is_private)
     <h1 class="mb-4">
-        {{$news['title']}}
+        {{$news->title}}
     </h1>
+    @if($news->image)
+    <img src="/{{$news->image}}" />
+    @endif
     <p>
-        {{$news['text']}}
+        {{$news->text}}
     </p>
     @else
     <x-card-warning>
