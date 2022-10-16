@@ -2,7 +2,7 @@
 
 namespace App\Models\News;
 
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class News
 {
@@ -15,54 +15,37 @@ class News
 
     public function getNewsByCategorySlug($slug): array
     {
-        $id = $this->category->getIdCategoryBySlug($slug);
-        $news = [];
-        foreach ($this->getNews() as $item) {
-            if ($item['category_id'] == $id) {
-                $news[] = $item;
-            }
-        }
+        $category_id = $this->category->getIdCategoryBySlug($slug);
 
-        return $news;
+        return DB::table('news')->where('category_id', '=', $category_id)->get()->toArray();
     }
 
     public function getNews(): array
     {
-        return json_decode(Storage::disk('local')->get('news.json'), true);
+        return DB::table('news')->get()->toArray();
     }
 
-    public function getNewsId($slug, $id): ?array
+    public function getNewsId($slug, $id)
     {
-        $newsList = $this->getNews();
         $category_id = $this->category->getIdCategoryBySlug($slug);
-        if (array_key_exists($id, $newsList) && $newsList[$id]['category_id'] == $category_id) {
-            return $newsList[$id];
-        }
 
-        return null;
+        return DB::table('news')
+            ->where('id', '=', $id)
+            ->where('category_id', '=', $category_id)
+            ->first();
     }
 
     public function getNewsWithSlug()
     {
-        $newsList = [];
-        foreach ($this->getNews() as $item) {
-            $slug = $this->category->getSlugById($item['category_id']);
-            $item['slug'] = $slug;
-            $newsList[] = $item;
-        }
-
-        return $newsList;
+        return DB::table('news')
+            ->join('categories', 'news.category_id', '=', 'categories.id')
+            ->select(['news.id', 'news.title', 'categories.slug'])
+            ->get()
+            ->toArray();
     }
 
     public function getNewsCategoryId($category_id)
     {
-        $news = [];
-        foreach ($this->getNews() as $item) {
-            if ($item['category_id'] == $category_id) {
-                $news[] = $item;
-            }
-        }
-
-        return $news;
+        return DB::table('news')->where('category_id', '=', $category_id)->get()->toArray();
     }
 }

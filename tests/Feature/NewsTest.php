@@ -16,32 +16,36 @@ class NewsTest extends TestCase
 
     public function test_a_news_list_view_can_be_rendered()
     {
-        $view = $this->view('pages.news.index', ['news' => [
-            865 => [
-                'id' => 865,
-                'title' => 'Test title',
-                'description' => 'Description',
-                'text' => 'text',
-                'isPrivate' => false,
-                "category_id" => 563,
-                'slug' => 'test-category'
-            ]
-        ]]);
+        $news = (object)[
+            'id' => 865,
+            'title' => 'Test title',
+            'description' => 'Description',
+            'text' => 'text',
+            'is_private' => false,
+            "category_id" => 563,
+            "image" => '',
+            'slug' => 'test-category'
+        ];
+
+        $view = $this->view('pages.news.index', ['news' => [$news]]);
 
         $view->assertSee('Test title');
     }
 
     public function test_a_news_one_view_can_be_rendered()
     {
-        $view = $this->view('pages.news.one', ['news' => [
+        $news = (object)[
             'id' => 865,
             'title' => 'Test title',
             'description' => 'Description',
             'text' => 'text',
-            'isPrivate' => false,
+            'is_private' => false,
             "category_id" => 563,
+            "image" => '',
             'slug' => 'test-category'
-        ]]);
+        ];
+
+        $view = $this->view('pages.news.one', ['news' => $news]);
 
         $view->assertSee('Test title');
         $view->assertSee('text');
@@ -49,15 +53,18 @@ class NewsTest extends TestCase
 
     public function test_a_news_one_view_private()
     {
-        $view = $this->view('pages.news.one', ['news' => [
+        $news = (object)[
             'id' => 865,
             'title' => 'Test title',
             'description' => 'Description',
             'text' => 'text',
-            'isPrivate' => true,
+            'is_private' => true,
             "category_id" => 563,
+            "image" => '',
             'slug' => 'test-category'
-        ]]);
+        ];
+
+        $view = $this->view('pages.news.one', ['news' => $news]);
 
         $view->assertDontSee('Test title');
         $view->assertDontSee('text');

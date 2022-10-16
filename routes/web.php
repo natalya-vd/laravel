@@ -8,7 +8,7 @@ use App\Http\Controllers\News\NewsController;
 use App\Http\Controllers\News\CategoriesController;
 
 use App\Http\Controllers\Admin\IndexController as AdminIndexController;
-
+use App\Http\Controllers\FilesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +26,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/info', [InfoController::class, 'index'])->name('info');
 Route::get('/auth', [AuthController::class, 'index'])->name('auth');
 Route::get('/save', [AdminIndexController::class, 'save'])->name('save');
+Route::get('/images/{fileName}', [FilesController::class, 'images'])->name('images');
 
 Route::name('news.')
     ->prefix('news')

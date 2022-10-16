@@ -2,56 +2,27 @@
 
 namespace App\Models\News;
 
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class Categories
 {
     public function getCategories(): array
     {
-        return json_decode(Storage::disk('local')->get('categories.json'), true);
-    }
-
-    public function getCategoryById($id): ?array
-    {
-        $categoryList = $this->getCategories();
-        if (array_key_exists($id, $categoryList)) {
-            return $categoryList[$id];
-        }
-
-        return null;
+        return DB::table('categories')->get()->toArray();
     }
 
     public function getSlugById($id)
     {
-        $categoryList = $this->getCategories();
-        if (array_key_exists($id, $categoryList)) {
-            return $categoryList[$id]['slug'];
-        }
-
-        return null;
+        return DB::table('categories')->where('id', '=', $id)->value('slug');
     }
 
-    public function getCategoryNameBySlug($slag)
+    public function getCategoryNameBySlug($slug)
     {
-        $id = $this->getIdCategoryBySlug($slag);
-        $category = $this->getCategoryById($id);
-        if ($category != []) {
-            return $category['title'];
-        } else {
-            return null;
-        }
+        return DB::table('categories')->where('slug', '=', $slug)->value('title');
     }
 
     public function getIdCategoryBySlug($slug)
     {
-        $id = null;
-        foreach ($this->getCategories() as $category) {
-            if ($category['slug'] == $slug) {
-                $id = $category['id'];
-                break;
-            }
-        }
-
-        return $id;
+        return DB::table('categories')->where('slug', '=', $slug)->value('id');
     }
 }

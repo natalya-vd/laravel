@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 use App\Http\Controllers\Controller;
@@ -37,20 +37,21 @@ class IndexController extends Controller
         return view('admin.pages.download-news')->with('categories', $category->getCategories());
     }
 
-    public function create(Request $request, Categories $category)
+    public function create(Request $request, Categories $category, News $news_model)
     {
         if ($request->isMethod('post')) {
-            $news = json_decode(Storage::disk('local')->get('news.json'), true);
-            $newValue = $request->except('_token');
-            $id = count($news) + 1;
+            $news = $request->except('_token');
+            $news['is_private'] = isset($news['is_private']);
+            $news['image'] = '';
 
-            $newValue['isPrivate'] = array_key_exists('isPrivate', $newValue) ? true : false;
-            $newValue['id'] = $id;
-            $news[] = $newValue;
+            if ($request->hasFile('image')) {
+                $path = $request->image->store('images', 'public');
+                $news['image'] = $path;
+            }
 
-            $this->save($news);
+            $id = $this->save($news);
 
-            return redirect()->route('news.category.one', [$category->getSlugById($newValue['category_id']), $id]);
+            return redirect()->route('news.category.one', [$category->getSlugById($news['category_id']), $id]);
         }
         return view('admin.pages.add-news', [
             'categories' => $category->getCategories()
@@ -59,7 +60,8 @@ class IndexController extends Controller
 
     public function save($news)
     {
-        Storage::disk('local')->put('news.json', json_encode($news, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+        return DB::table('news')
+            ->insertGetId($news);
     }
 
     public function exportExcel($news, $category_id)

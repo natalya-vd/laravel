@@ -30,13 +30,13 @@ class CategoriesTest extends TestCase
 
     public function test_a_categories_list_view_can_be_rendered()
     {
-        $view = $this->view('pages.news.categories', ['categories' => [
-            865 => [
-                'id' => 865,
-                'title' => 'Test category',
-                'slug' => 'slug',
-            ]
-        ]]);
+        $category = (object) [
+            'id' => 865,
+            'title' => 'Test category',
+            'slug' => 'slug',
+        ];
+
+        $view = $this->view('pages.news.categories', ['categories' => [$category]]);
 
         $view->assertSee('Test category');
         $view->assertSee('/news/category/slug');

@@ -27,8 +27,8 @@
             <div class="form-floating mb-3">
                 <select class="form-select" name="category_id" id="categoryNews" aria-label="Выбор категории">
                     @forelse($categories as $item)
-                    <option value="{{ $item['id'] }}">
-                        {{ $item['title'] }}
+                    <option value="{{ $item->id }}">
+                        {{ $item->title }}
                     </option>
                     @empty
                     <option value="0">
