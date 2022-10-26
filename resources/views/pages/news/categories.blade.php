@@ -8,7 +8,7 @@
     @endempty
 
     @if($categories)
-    <ul class="list-group list-group-flush">
+    <ul class="list-group list-group-flush mb-4">
         @foreach ($categories as $item)
         <li class="list-group-item">
             <a class="stretched-link" href="{{ route('news.category.newsList', $item->slug) }}">
@@ -17,5 +17,6 @@
         </li>
         @endforeach
     </ul>
+    {{$categories->links()}}
     @endif
 </x-layout>

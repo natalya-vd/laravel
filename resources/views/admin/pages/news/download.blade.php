@@ -8,9 +8,13 @@
 @include('admin.components.header')
 @endsection
 
+@section('menu')
+@include('admin.components.menu')
+@endsection
+
 @section('content')
 <main class="container py-5">
-    <form class="add-news card border-0 mx-auto" action="{{ route('admin.downloadNews') }}" method="post">
+    <form class="add-news card border-0 mx-auto" action="{{ route('admin.news.download') }}" method="post">
         @csrf
         <p class="bg-secondary p-3 bg-gradient text-white">Выберите формат файла</p>
         <div class="card-body">

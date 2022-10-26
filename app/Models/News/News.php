@@ -2,50 +2,30 @@
 
 namespace App\Models\News;
 
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
-class News
+class News extends Model
 {
-    private Categories $category;
+    protected $table = 'news';
 
-    public function __construct(Categories $category)
+    protected $fillable = [
+        'category_id',
+        'title',
+        'description',
+        'text',
+        'image',
+        'is_private'
+    ];
+
+    public function scopeOneNews(Builder $query, $id, $category_id): Builder
     {
-        $this->category = $category;
+        return $query->where('id', $id)
+            ->where('category_id', $category_id);
     }
 
-    public function getNewsByCategorySlug($slug): array
+    public function category()
     {
-        $category_id = $this->category->getIdCategoryBySlug($slug);
-
-        return DB::table('news')->where('category_id', '=', $category_id)->get()->toArray();
-    }
-
-    public function getNews(): array
-    {
-        return DB::table('news')->get()->toArray();
-    }
-
-    public function getNewsId($slug, $id)
-    {
-        $category_id = $this->category->getIdCategoryBySlug($slug);
-
-        return DB::table('news')
-            ->where('id', '=', $id)
-            ->where('category_id', '=', $category_id)
-            ->first();
-    }
-
-    public function getNewsWithSlug()
-    {
-        return DB::table('news')
-            ->join('categories', 'news.category_id', '=', 'categories.id')
-            ->select(['news.id', 'news.title', 'categories.slug'])
-            ->get()
-            ->toArray();
-    }
-
-    public function getNewsCategoryId($category_id)
-    {
-        return DB::table('news')->where('category_id', '=', $category_id)->get()->toArray();
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 }

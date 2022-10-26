@@ -1,0 +1,33 @@
+.table {
+    &__title {
+        padding: 10px;
+
+        &_size-1 {
+            width: 30px;
+        }
+
+        &_size-2 {
+            width: 20%;
+        }
+
+        &_size-3 {
+            width: 35%;
+        }
+
+        &_size-4 {
+            width: 100px
+        }
+
+        &_size-5 {
+            width: 110px
+        }
+
+        &_size-auto {
+            width: auto;
+        }
+    }
+
+    &__cell {
+        padding: 10px;
+    }
+}
