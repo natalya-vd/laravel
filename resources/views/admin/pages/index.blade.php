@@ -8,8 +8,12 @@
 @include('admin.components.header')
 @endsection
 
+@section('menu')
+@include('admin.components.menu')
+@endsection
+
 @section('content')
-<main class="container">
+<main>
     <div class="card w-50 mx-auto my-5">
         <p class="card-body">
             Здесь будет админка

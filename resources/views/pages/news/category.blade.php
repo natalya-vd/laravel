@@ -6,9 +6,9 @@
     @endempty
 
     @if($news)
-    <h1 class="mb-4">Новости категории {{ $category }}</h1>
+    <h1 class="mb-4">Новости категории {{ $categoryTitle }}</h1>
 
-    <ul class="m-0 p-0">
+    <ul class="mb-4 p-0">
         @foreach ($news as $item)
         <li class="card border-0 mb-3">
             <a class="card-body text-decoration-none" href="{{ route('news.category.one', [Route::current()->originalParameters()['slug'], $item->id]) }}">
@@ -25,5 +25,6 @@
         </li>
         @endforeach
     </ul>
+    {{$news->links()}}
     @endif
 </x-layout>

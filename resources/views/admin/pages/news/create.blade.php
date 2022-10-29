@@ -8,16 +8,22 @@
 @include('admin.components.header')
 @endsection
 
+@section('menu')
+@include('admin.components.menu')
+@endsection
+
 @section('content')
 <main class="container py-5">
-    <form class="add-news card border-0 mx-auto" action="{{ route('admin.create') }}" method="post" enctype="multipart/form-data">
+    @include('admin.components.message')
+
+    <form class="add-news card border-0 mx-auto" action="{{ route('admin.news.create') }}" method="post" enctype="multipart/form-data">
         @csrf
         <p class="bg-secondary p-3 bg-gradient text-white">Добавить новость</p>
         <div class="card-body">
             <div class="form-floating mb-3">
                 <select class="form-select" name="category_id" id="categoryNews" aria-label="Выбор категории">
                     @forelse($categories as $item)
-                    <option @if (old('category_news')==$item->id) selected @endif value="{{ $item->id }}">
+                    <option @if (old('category_id')==$item->id) selected @endif value="{{ $item->id }}">
                         {{ $item->title }}
                     </option>
                     @empty
@@ -36,21 +42,21 @@
             </label>
 
             <div class="form-floating">
-                <input class="form-control form-control-lg mb-3" type="text" placeholder="Заголовок новости" name="title" id="titleNews" value="{{ old('title_news') }}">
+                <input class="form-control form-control-lg mb-3" type="text" placeholder="Заголовок новости" name="title" id="titleNews" value="{{ old('title') }}">
                 <label for="titleNews">
                     Заголовок новости
                 </label>
             </div>
 
             <div class="form-floating">
-                <textarea class="add-news__textarea form-control form-control-lg mb-3" name="description" placeholder="Введите краткое описание новости" id="description">{{ old('description_news') }}</textarea>
+                <textarea class="add-news__textarea form-control form-control-lg mb-3" name="description" placeholder="Введите краткое описание новости" id="description">{{ old('description') }}</textarea>
                 <label for="description">
                     Введите краткое описание новости
                 </label>
             </div>
 
             <div class="form-floating">
-                <textarea class="add-news__textarea form-control form-control-lg mb-3" name="text" placeholder="Введите новость" id="newsText">{{ old('text_news') }}</textarea>
+                <textarea class="add-news__textarea form-control form-control-lg mb-3" name="text" placeholder="Введите новость" id="newsText">{{ old('text') }}</textarea>
                 <label for="newsText">
                     Введите новость
                 </label>

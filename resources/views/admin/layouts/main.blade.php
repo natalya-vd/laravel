@@ -12,6 +12,9 @@
 </head>
 
 <body>
-    @yield('header')
-    @yield('content')
+    <div class="wrapper">
+        <div class="header">@yield('header')</div>
+        <div class="menu">@yield('menu')</div>
+        <div class="body">@yield('content')</div>
+    </div>
 </body>
