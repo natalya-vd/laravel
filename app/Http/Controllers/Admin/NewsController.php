@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\News\CreateRequest;
+use App\Http\Requests\News\EditRequest;
 use App\Models\News\News;
-use App\Models\News\Category;
 use App\Queries\NewsQueryBuilder;
 use App\Queries\CategoriesQueryBuilder;
 
@@ -16,72 +16,70 @@ class NewsController extends Controller
         return view('admin.pages.news.index')->with('news', $builder->getNewsPagination());
     }
 
-    public function create(Request $request, Category $category, NewsQueryBuilder $builder, CategoriesQueryBuilder $builder_category)
+    public function store(CreateRequest $request, NewsQueryBuilder $builder, CategoriesQueryBuilder $builder_category)
     {
-        $category = $builder_category->getCategories();
-        if ($request->isMethod('post')) {
-            $news = $request->except('_token');
-            $news['is_private'] = isset($news['is_private']);
-            $news['image'] = '';
+        $news = $request->validated();
+        $news['is_private'] = isset($news['is_private']);
+        $news['image'] = '';
 
-            if ($request->hasFile('image')) {
-                $path = $request->image->store('images', 'public');
-                $news['image'] = $path;
-            }
-
-            $newsOne = $builder->create($news);
-
-            if ($newsOne) {
-                return redirect()->route('news.category.one', [
-                    'id' => $newsOne->id,
-                    'slug' => Category::query()
-                        ->where('id', $news['category_id'])
-                        ->get()
-                        ->value('slug')
-                ]);
-            }
-
-            return back()->with('error', 'Что-то пошло не так. Новость не добавлена');
+        if ($request->hasFile('image')) {
+            $path = $request->image->store('images', 'public');
+            $news['image'] = $path;
         }
 
+        $newsOne = $builder->create($news);
+
+        if ($newsOne) {
+            return redirect()->route('news.category.one', [
+                'id' => $newsOne->id,
+                'slug' => $builder_category
+                    ->getCategory($news['category_id'])
+                    ->value('slug')
+            ]);
+        }
+
+        return back()->with('error',  __('messages.admin.news.create.error'));
+    }
+
+    public function create(CategoriesQueryBuilder $builder_category)
+    {
         return view('admin.pages.news.create', [
-            'categories' => $category
+            'categories' => $builder_category->getCategories()
         ]);
     }
 
-    public function update(Request $request, News $news, NewsQueryBuilder $builder, CategoriesQueryBuilder $builder_category)
+    public function update(EditRequest $request, News $news, NewsQueryBuilder $builder)
     {
-        $categories =  $builder_category->getCategories();
+        $data = $request->validated();
 
-        if ($request->isMethod('post')) {
-            $data = $request->except('_token');
+        $data['is_private'] = isset($data['is_private']);
 
-            $data['is_private'] = isset($data['is_private']);
-
-            if ($request->hasFile('image')) {
-                $path = $request->image->store('images', 'public');
-                $data['image'] = $path;
-            }
-
-            if ($builder->update($news, $data)) {
-                return back()->with('success', 'Новость обновлена');
-            }
-
-            return back()->with('error', 'Что-то пошло не так. Новость не обновлена');
+        if ($request->hasFile('image')) {
+            $path = $request->image->store('images', 'public');
+            $data['image'] = $path;
         }
 
+        if ($builder->update($news, $data)) {
+            return back()->with('success', __('messages.admin.news.update.success'));
+        }
+
+        return back()->with('error', __('messages.admin.news.update.error'));
+    }
+
+    public function edit(News $news, CategoriesQueryBuilder $builder)
+    {
         return view('admin.pages.news.edit', [
             'news' => $news,
-            'categories' => $categories
+            'categories' => $builder->getCategories()
         ]);
     }
 
-    public function delete(News $news, NewsQueryBuilder $builder)
+    public function destroy(News $news, NewsQueryBuilder $builder)
     {
         if ($builder->delete($news)) {
-            return back()->with('success', 'Новость удалена');
+            return back()->with('success', __('messages.admin.news.delete.success'));
         }
 
-        return back()->with('error', 'Что-то пошло не так. Новость не удалена');
+        return back()->with('error', __('messages.admin.news.delete.error'));
     }
 }

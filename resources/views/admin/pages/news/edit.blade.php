@@ -18,6 +18,7 @@
 
     <form class="add-news card border-0 mx-auto" action="{{ route('admin.news.update', ['news' => $news]) }}" method="post" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
         <p class="bg-secondary p-3 bg-gradient text-white">Редактировать новость</p>
         <div class="card-body">
             <div class="form-floating mb-3">
@@ -68,7 +69,7 @@
             </div>
 
             <div class="mt-5 mb-4">
-                <button class="btn-outline-secondary btn bg-gradient btn-lg w-100" type="submit">
+                <button class="btn-outline-secondary btn bg-gradient btn-lg w-100" type="submit" dusk="update-news">
                     Сохранить
                 </button>
             </div>
