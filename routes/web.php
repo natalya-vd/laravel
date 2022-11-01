@@ -52,19 +52,19 @@ Route::name('admin.')
             ->prefix('news')
             ->group(function () {
                 Route::get('/', [AdminNewsController::class, 'list'])->name('list');
-                Route::match(['get', 'post'], '/create', [AdminNewsController::class, 'create'])->name('create');
-                Route::match(['get', 'post'], '/{news}/edit', [AdminNewsController::class, 'update'])->name('update');
-                Route::get('/{news}/delete', [AdminNewsController::class, 'delete'])->name('delete');
                 Route::match(['get', 'post'], '/download', [AdminIndexController::class, 'download'])->name('download');
             });
         Route::name('category.')
             ->prefix('category')
             ->group(function () {
                 Route::get('/', [AdminCategoryController::class, 'list'])->name('list');
-                Route::match(['get', 'post'], '/create', [AdminCategoryController::class, 'create'])->name('create');
-                Route::match(['get', 'post'], '/{category}/edit', [AdminCategoryController::class, 'update'])->name('update');
-                Route::get('/{category}/delete', [AdminCategoryController::class, 'delete'])->name('delete');
             });
+        Route::resource('/news', AdminNewsController::class)->except([
+            'index', 'show'
+        ]);
+        Route::resource('/category', AdminCategoryController::class)->except([
+            'index', 'show'
+        ]);
     });
 
 

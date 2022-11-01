@@ -18,6 +18,7 @@
 
     <form class="add-news card border-0 mx-auto" action="{{ route('admin.category.update',['category' => $category]) }}" method="post" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
         <p class="bg-secondary p-3 bg-gradient text-white">Редактировать категорию</p>
         <div class="card-body">
             <div class="form-floating">
@@ -28,7 +29,7 @@
             </div>
 
             <div class="mt-5 mb-4">
-                <button class="btn-outline-secondary btn bg-gradient btn-lg w-100" type="submit">
+                <button class="btn-outline-secondary btn bg-gradient btn-lg w-100" type="submit" dusk="update-category">
                     Сохранить
                 </button>
             </div>

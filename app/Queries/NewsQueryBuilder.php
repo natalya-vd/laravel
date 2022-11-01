@@ -18,14 +18,14 @@ final class NewsQueryBuilder
         $this->model = News::query();
     }
 
-    public function getNewsPagination(): Collection|LengthAwarePaginator
+    public function getNewsPagination(): LengthAwarePaginator
     {
         return $this->model
             ->with('category')
             ->paginate(config('pagination.admin.news'));
     }
 
-    public function getNewsColumnsPagination(array $column): Collection|LengthAwarePaginator
+    public function getNewsColumnsPagination(array $column): LengthAwarePaginator
     {
         return $this->model
             ->join('categories', 'news.category_id', '=', 'categories.id')
@@ -33,7 +33,7 @@ final class NewsQueryBuilder
             ->paginate(config('pagination.front.news'));
     }
 
-    public function getNewsWithCategoryPagination($category_id): Collection|LengthAwarePaginator
+    public function getNewsWithCategoryPagination($category_id): LengthAwarePaginator
     {
         return $this->model
             ->where('category_id', $category_id)

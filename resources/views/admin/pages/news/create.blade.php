@@ -16,7 +16,7 @@
 <main class="container py-5">
     @include('admin.components.message')
 
-    <form class="add-news card border-0 mx-auto" action="{{ route('admin.news.create') }}" method="post" enctype="multipart/form-data">
+    <form class="add-news card border-0 mx-auto" action="{{ route('admin.news.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <p class="bg-secondary p-3 bg-gradient text-white">Добавить новость</p>
         <div class="card-body">
@@ -68,7 +68,7 @@
             </div>
 
             <div class="mt-5 mb-4">
-                <button class="btn-outline-secondary btn bg-gradient btn-lg w-100" type="submit">
+                <button class="btn-outline-secondary btn bg-gradient btn-lg w-100" type="submit" dusk="create-news">
                     Добавить
                 </button>
             </div>
