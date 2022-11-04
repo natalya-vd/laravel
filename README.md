@@ -8,4 +8,5 @@
 # Команды
 
 -   Сбросить БД и запустить сидеры: `php artisan migrate:fresh --seed`
+-   Запустить миграции `php artisan migrate`
 -   Запустить Browser тесты: `php artisan dusk`

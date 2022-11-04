@@ -18,11 +18,13 @@
                 Новости по категориям
             </a>
         </li>
+        @if(Auth::user()->is_admin)
         <li>
             <a @class([ 'nav__item' , 'list-group-item' , 'list-group-item-action' , 'active'=> Route::currentRouteName() == 'admin.home'
                 ]) href="{{ route('admin.home') }}">
                 Админка
             </a>
         </li>
+        @endif
     </ul>
 </nav>
