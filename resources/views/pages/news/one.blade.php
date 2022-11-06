@@ -6,7 +6,12 @@
     @endempty
 
     @if($news)
-    @if(!$news->is_private)
+    @if(Auth::user() === null && $news->is_private)
+    <x-card-warning>
+        <a href="{{ route('login') }}">Авторизуйтесь</a> или <a href="{{ route('register') }}">зарегистрируйтесь</a> для просмотра
+
+    </x-card-warning>
+    @else
     <h1 class="mb-4">
         {{$news->title}}
     </h1>
@@ -16,10 +21,6 @@
     <p>
         {{$news->text}}
     </p>
-    @else
-    <x-card-warning>
-        Зарегистрируйтесь для просмотра
-    </x-card-warning>
     @endif
     @endif
 

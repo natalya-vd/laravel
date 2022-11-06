@@ -15,6 +15,11 @@
             </li>
             @endif
             @else
+            @if(Auth::user()->avatar)
+            <li class="me-2">
+                <img src="{{Auth::user()->avatar}}" class="avatar" />
+            </li>
+            @endif
             <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                     {{ Auth::user()->name }}

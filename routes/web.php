@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoController;
+use App\Http\Controllers\FilesController;
+use App\Http\Controllers\SocialProviderController;
 
 use App\Http\Controllers\News\NewsController;
 use App\Http\Controllers\News\CategoryController;
@@ -12,8 +14,7 @@ use App\Http\Controllers\Admin\IndexController as AdminIndexController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
-
-use App\Http\Controllers\FilesController;
+use App\Http\Controllers\Admin\ParserController as AdminParserController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -58,6 +59,7 @@ Route::middleware('auth')
             ->group(function () {
                 Route::get('/', [AdminIndexController::class, 'index'])->name('home');
                 Route::get('/download-img', [AdminIndexController::class, 'downloadImg'])->name('downloadImg');
+                Route::get('/parser', AdminParserController::class)->name('parser');
                 Route::name('news.')
                     ->prefix('news')
                     ->group(function () {
@@ -80,6 +82,16 @@ Route::middleware('auth')
                 ]);
             });
     });
+
+Route::group(['middlleware' => 'guest'], function () {
+    Route::get('/auth/redirect/{driver}', [SocialProviderController::class, 'redirect'])
+        ->where('driver', '\w+')
+        ->name('social.auth.redirect');
+
+    Route::get('/auth/callback/{driver}', [SocialProviderController::class, 'callback'])
+        ->where('driver', '\w+')
+        ->name('social.auth.callback');
+});
 
 Route::fallback(function () {
     return view('pages.404');
