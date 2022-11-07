@@ -11,11 +11,14 @@ class News extends Model
 
     protected $fillable = [
         'category_id',
+        'aggregator_id',
         'title',
         'description',
         'text',
         'image',
-        'is_private'
+        'is_private',
+        'link',
+        'guid'
     ];
 
     public function scopeOneNews(Builder $query, $id, $category_id): Builder
@@ -27,5 +30,10 @@ class News extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+    public function aggregator()
+    {
+        return $this->belongsTo(Aggregator::class, 'aggregator_id', 'id');
     }
 }
