@@ -25,6 +25,12 @@
             </a>
         </li>
         <li>
+            <a @class([ 'border' , 'border-0' , 'list-group-item' , 'list-group-item-action' , 'active'=> Route::currentRouteName() == 'admin.resources.index'
+                ]) href="{{ route('admin.resources.index') }}">
+                Ресурсы
+            </a>
+        </li>
+        <li>
             <a @class([ 'border' , 'border-0' , 'list-group-item' , 'list-group-item-action' , 'active'=> Route::currentRouteName() == 'home'
                 ]) href="{{ route('home') }}">
                 Главная новости

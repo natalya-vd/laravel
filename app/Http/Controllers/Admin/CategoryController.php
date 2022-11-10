@@ -34,8 +34,11 @@ class CategoryController extends Controller
         return view('admin.pages.categories.create');
     }
 
-    public function update(EditRequest $request, Category $category, CategoriesQueryBuilder $builder): RedirectResponse
-    {
+    public function update(
+        EditRequest $request,
+        Category $category,
+        CategoriesQueryBuilder $builder
+    ): RedirectResponse {
         $data = $request->validated();
 
         if ($builder->update($category, $data)) {

@@ -4,9 +4,9 @@ namespace App\Models\News;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Aggregator extends Model
+class Resource extends Model
 {
-    protected $table = 'aggregators';
+    protected $table = 'resources';
 
     protected $fillable = [
         'title',
@@ -17,6 +17,6 @@ class Aggregator extends Model
 
     public function news()
     {
-        return $this->hasMany(News::class, '`aggregator_id`', 'id');
+        return $this->hasMany(News::class, '`resource_id`', 'id');
     }
 }
