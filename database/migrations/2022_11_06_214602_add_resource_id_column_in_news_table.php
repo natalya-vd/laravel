@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('news', function (Blueprint $table) {
-            $table->bigInteger('aggregator_id')->unsigned()->nullable();
-            $table->foreign('aggregator_id')->references('id')->on('aggregators');
+            $table->bigInteger('resource_id')->unsigned()->nullable();
+            $table->foreign('resource_id')->references('id')->on('resources');
         });
     }
 
@@ -27,7 +27,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('news', function (Blueprint $table) {
-            $table->dropColumn('aggregator_id');
+            $table->dropColumn('resource_id');
         });
     }
 };

@@ -52,6 +52,22 @@ final class NewsQueryBuilder
         return News::create($data);
     }
 
+    public function createParser(array $data, int $resource_id)
+    {
+        try {
+            foreach ($data['news'] as $item) {
+                $item['category_id'] = 1; // TODO: Не поняла, как получать категорию.
+                $item['resource_id'] = $resource_id;
+                $item['is_private'] = false;
+                $item['text'] = $item['description'];
+
+                $this->create($item);
+            }
+        } catch (\Exception $e) {
+            $e->getMessage();
+        }
+    }
+
     public function update(News $news, array $data): bool
     {
         return $news->fill($data)->save();

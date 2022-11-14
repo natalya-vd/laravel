@@ -16,11 +16,14 @@
         {{$news->title}}
     </h1>
     @if($news->image)
-    <img src="/{{$news->image}}" />
+    <img src="{{ Storage::disk('public')->url($news->image) }}" width="300" height="300" />
     @endif
     <p>
         {{$news->text}}
     </p>
+    @if($news->link)
+    <a href="{{ $news->link }}" target="_blank">Читать в источнике</a>
+    @endif
     @endif
     @endif
 

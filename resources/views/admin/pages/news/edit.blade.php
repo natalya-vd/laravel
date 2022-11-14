@@ -49,18 +49,20 @@
                 </label>
             </div>
 
-            <div class="form-floating">
-                <textarea class="add-news__textarea form-control form-control-lg mb-3" name="description" placeholder="Краткое описание новости" id="description">{{ $news->description }}</textarea>
-                <label for="description">
+            <div class="mb-3">
+                <label class="form-label" for="description">
                     Краткое описание новости
                 </label>
+                <textarea class="add-news__textarea form-control form-control-lg mb-3" name="description" placeholder="Краткое описание новости" id="description">{{ $news->description }}</textarea>
+
             </div>
 
-            <div class="form-floating">
-                <textarea class="add-news__textarea form-control form-control-lg mb-3" name="text" placeholder="Новость" id="newsText">{{ $news->text }}</textarea>
-                <label for="newsText">
+            <div class="mb-3">
+                <label class="form-label" for="newsText">
                     Новость
                 </label>
+                <textarea class="add-news__textarea form-control form-control-lg mb-3" name="text" placeholder="Новость" id="newsText">{{ $news->text }}</textarea>
+
             </div>
 
             <div class="mb-3">
@@ -77,3 +79,16 @@
     </form>
 </main>
 @endsection
+
+@push('body')
+<script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+
+<script>
+    CKEDITOR.replace('description', {
+        filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+        filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+        filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+        filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+    });
+</script>
+@endpush

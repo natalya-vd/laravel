@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoController;
-use App\Http\Controllers\FilesController;
 use App\Http\Controllers\SocialProviderController;
 
 use App\Http\Controllers\News\NewsController;
@@ -15,8 +14,9 @@ use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\ParserController as AdminParserController;
-
+use App\Http\Controllers\Admin\ResourceController as AdminResourceController;
 use Illuminate\Support\Facades\Route;
+use \UniSharp\LaravelFilemanager\Lfm;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +32,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/info', [InfoController::class, 'index'])->name('info');
 Route::get('/save', [AdminIndexController::class, 'save'])->name('save');
-Route::get('/images/{fileName}', [FilesController::class, 'images'])->name('images');
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth', 'is_admin']], function () {
+    Lfm::routes();
+});
 
 Auth::routes();
 
@@ -77,6 +79,7 @@ Route::middleware('auth')
                 Route::resource('/category', AdminCategoryController::class)->except([
                     'index', 'show'
                 ]);
+                Route::resource('/resources', AdminResourceController::class)->except(['show']);
                 Route::resource('/users', AdminUserController::class)->except([
                     'create', 'store', 'show'
                 ]);

@@ -11,7 +11,7 @@ class News extends Model
 
     protected $fillable = [
         'category_id',
-        'aggregator_id',
+        'resource_id',
         'title',
         'description',
         'text',
@@ -32,8 +32,8 @@ class News extends Model
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
-    public function aggregator()
+    public function resource()
     {
-        return $this->belongsTo(Aggregator::class, 'aggregator_id', 'id');
+        return $this->belongsTo(Resource::class, 'resource_id', 'id');
     }
 }
