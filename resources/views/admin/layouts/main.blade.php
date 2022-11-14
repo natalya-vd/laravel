@@ -17,4 +17,5 @@
         <div class="menu">@yield('menu')</div>
         <div class="body">@yield('content')</div>
     </div>
+    @stack('body')
 </body>

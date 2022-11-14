@@ -3,9 +3,22 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('auth.authorization') }}</div>
+                    <div class="card-header">
+                        {{ __('auth.authorization') }}
+                    </div>
 
                     <div class="card-body">
+                        <div>
+                            <a href="{{ route('social.auth.redirect', ['driver' => 'vkontakte']) }}">
+                                Войти через vk
+                            </a>
+                        </div>
+                        <div>
+                            <a href="{{ route('social.auth.redirect', ['driver' => 'github']) }}">
+                                Войти через github
+                            </a>
+                        </div>
+
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
 

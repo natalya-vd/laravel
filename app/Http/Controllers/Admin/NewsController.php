@@ -8,6 +8,7 @@ use App\Http\Requests\News\EditRequest;
 use App\Models\News\News;
 use App\Queries\NewsQueryBuilder;
 use App\Queries\CategoriesQueryBuilder;
+use App\Services\UploadFileService;
 
 class NewsController extends Controller
 {
@@ -16,15 +17,18 @@ class NewsController extends Controller
         return view('admin.pages.news.index')->with('news', $builder->getNewsPagination());
     }
 
-    public function store(CreateRequest $request, NewsQueryBuilder $builder, CategoriesQueryBuilder $builder_category)
-    {
+    public function store(
+        CreateRequest $request,
+        NewsQueryBuilder $builder,
+        CategoriesQueryBuilder $builder_category,
+        UploadFileService $uploadedFile
+    ) {
         $news = $request->validated();
         $news['is_private'] = isset($news['is_private']);
         $news['image'] = '';
 
         if ($request->hasFile('image')) {
-            $path = $request->image->store('images', 'public');
-            $news['image'] = $path;
+            $news['image'] = $uploadedFile->uploadImage($request->file('image'));
         }
 
         $newsOne = $builder->create($news);
@@ -48,15 +52,18 @@ class NewsController extends Controller
         ]);
     }
 
-    public function update(EditRequest $request, News $news, NewsQueryBuilder $builder)
-    {
+    public function update(
+        EditRequest $request,
+        News $news,
+        NewsQueryBuilder $builder,
+        UploadFileService $uploadedFile
+    ) {
         $data = $request->validated();
 
         $data['is_private'] = isset($data['is_private']);
 
         if ($request->hasFile('image')) {
-            $path = $request->image->store('images', 'public');
-            $data['image'] = $path;
+            $data['image'] = $uploadedFile->uploadImage($request->file('image'));
         }
 
         if ($builder->update($news, $data)) {
