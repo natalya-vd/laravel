@@ -14,6 +14,7 @@
 
 @section('content')
 <main>
+    <a href="{{ route('admin.parser') }}">Парсить новости</a>
     <div class="card w-50 mx-auto my-5">
         <p class="card-body">
             Здесь будет админка

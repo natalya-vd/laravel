@@ -6,20 +6,24 @@
     @endempty
 
     @if($news)
-    @if(!$news->is_private)
+    @if(Auth::user() === null && $news->is_private)
+    <x-card-warning>
+        <a href="{{ route('login') }}">Авторизуйтесь</a> или <a href="{{ route('register') }}">зарегистрируйтесь</a> для просмотра
+
+    </x-card-warning>
+    @else
     <h1 class="mb-4">
         {{$news->title}}
     </h1>
     @if($news->image)
-    <img src="/{{$news->image}}" />
+    <img src="{{ Storage::disk('public')->url($news->image) }}" width="300" height="300" />
     @endif
     <p>
         {{$news->text}}
     </p>
-    @else
-    <x-card-warning>
-        Зарегистрируйтесь для просмотра
-    </x-card-warning>
+    @if($news->link)
+    <a href="{{ $news->link }}" target="_blank">Читать в источнике</a>
+    @endif
     @endif
     @endif
 
